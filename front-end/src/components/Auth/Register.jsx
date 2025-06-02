@@ -20,6 +20,14 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    if (password.length !== 8) {
+      toast.error("Password must be only 8 characters long.");
+      return;
+    }
+    if (phone.length !== 10) {
+      toast.error("Phone number must be only 10 characters long.");
+      return;
+    }
     try {
       const { data } = await axios.post(
         "http://localhost:8000/api/v1/user/register",
@@ -72,7 +80,7 @@ const Register = () => {
               <div>
                 <input
                   type="text"
-                  placeholder="Zeeshan"
+                  placeholder="Varun"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -84,7 +92,7 @@ const Register = () => {
               <div>
                 <input
                   type="email"
-                  placeholder="zk@gmail.com"
+                  placeholder="var@gmail.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -95,8 +103,7 @@ const Register = () => {
               <label>Phone Number</label>
               <div>
                 <input
-                  type="number"
-                  placeholder="12345678"
+                  placeholder=""
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                 />

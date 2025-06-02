@@ -15,7 +15,14 @@ const Login = () => {
   const { isAuthorized, setIsAuthorized } = useContext(Context); //using context api for state management
 
   const handleLogin = async (e) => {
-    e.preventDefault(); // it prevents from loading the screen
+    e.preventDefault();
+
+    // Validate password length
+    if (password.length !== 8) {
+      toast.error("Password must be exactly 8 characters long.");
+      return;
+    }
+
     try {
       const { data } = await axios.post(
         "http://localhost:8000/api/v1/user/login",
@@ -28,7 +35,7 @@ const Login = () => {
         }
       );
       toast.success(data.message);
-      setEmail(""); //making input fields empty after successful login
+      setEmail("");
       setPassword("");
       setRole("");
       setIsAuthorized(true);
